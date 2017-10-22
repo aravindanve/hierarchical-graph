@@ -1,5 +1,5 @@
 let { Graph } = require('./lib/graph');
-let { removeCycles } = require('./lib/dag');
+let { removeCycles, minimizeEdgesByTR } = require('./lib/dag');
 
 // hierarchical graph sort
 
@@ -43,11 +43,13 @@ const edges = [
 ];
 
 console.log('starting...');
-console.log('input edges', edges.length);
-const graph = new Graph(null, edges);
+console.log('edges.length', edges.length);
 
-console.log('graph edges', graph.edgeCount());
-const reducedGraph = removeCycles(graph);
+const g = new Graph(null, edges);
+console.log('g.edgeCount', g.edgeCount);
 
-console.log('reduced graph', reducedGraph.edgeCount());
+const g1 = removeCycles(g);
+console.log('g1.edgeCount', g1.edgeCount);
 
+const g2 = minimizeEdgesByTR(g1);
+console.log('g2.edgeCount', g2.edgeCount);
