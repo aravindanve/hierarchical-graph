@@ -1,5 +1,6 @@
 let { Graph } = require('./lib/graph');
 let { removeCycles, minimizeEdgesByTR } = require('./lib/dag');
+let { assignLayers } = require('./lib/layout');
 
 // hierarchical graph sort
 
@@ -47,9 +48,15 @@ console.log('edges.length', edges.length);
 
 const g = new Graph(null, edges);
 console.log('g.edgeCount', g.edgeCount);
+console.log('g.edges', `(${g.edges().join('), (')})`);
 
 const g1 = removeCycles(g);
 console.log('g1.edgeCount', g1.edgeCount);
+console.log('g1.edges', `(${g1.edges().join('), (')})`);
 
 const g2 = minimizeEdgesByTR(g1);
 console.log('g2.edgeCount', g2.edgeCount);
+console.log('g2.edges', `(${g2.edges().join('), (')})`);
+
+const layers = assignLayers(g2);
+console.log('layers', layers);
